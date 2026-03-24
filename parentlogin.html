@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Parent Login</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #9b34eb 0%, #6a11cb 50%, #2575fc 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated background elements */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 30%);
+      z-index: 1;
+      animation: pulse 15s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+
+    /* Floating bubbles */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      animation: float 15s infinite linear;
+      z-index: 1;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-1000px) rotate(720deg); }
+    }
+
+    .login-container {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 420px;
+      box-sizing: border-box;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .login-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .login-container h2 {
+      color: #9b34eb;
+      margin-bottom: 30px;
+      font-size: 32px;
+      font-weight: 700;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .login-container h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(to right, #9b34eb, #6a11cb);
+      border-radius: 2px;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #9b34eb;
+      font-weight: 600;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e1d0f5;
+      border-radius: 10px;
+      font-size: 15px;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+      background-color: #f9f4ff;
+      color: #333;
+    }
+
+    .form-group input:hover {
+      border-color: #c89df0;
+      background-color: #fff;
+      box-shadow: 0 0 0 3px rgba(155, 52, 235, 0.1);
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #9b34eb;
+      background-color: #fff;
+      box-shadow: 0 0 0 4px rgba(155, 52, 235, 0.15);
+    }
+
+    .form-group::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, #9b34eb, #6a11cb);
+      transition: width 0.4s ease;
+    }
+
+    .form-group:focus-within::after {
+      width: 100%;
+    }
+
+    .login-button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right, #9b34eb, #871ee2);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.5px;
+    }
+
+    .login-button:hover {
+      background: linear-gradient(to right, #871ee2, #7519c9);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 15px rgba(155, 52, 235, 0.3);
+    }
+
+    .login-button:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 8px rgba(155, 52, 235, 0.2);
+    }
+
+    .login-button::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      border-radius: 100%;
+      transform: scale(1, 1) translate(-50%);
+      transform-origin: 50% 50%;
+    }
+
+    .login-button:focus:not(:active)::after {
+      animation: ripple 1s ease-out;
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+      }
+      100% {
+        transform: scale(40, 40);
+        opacity: 0;
+      }
+    }
+
+    .google-button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #d3a9f5;
+      border-radius: 10px;
+      background-color: white;
+      color: #9b34eb;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .google-button:hover {
+      background-color: #f9f4ff;
+      border-color: #9b34eb;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(155, 52, 235, 0.15);
+    }
+
+    .google-button:active {
+      transform: translateY(0);
+    }
+
+    .google-button img {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      transition: all 0.4s ease;
+    }
+
+    /* Enhanced image hover effect */
+    .google-button:hover img {
+      transform: rotate(10deg) scale(1.2);
+      filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+    }
+
+    .signup-link {
+      margin-top: 24px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .signup-link a {
+      color: #9b34eb;
+      font-weight: 600;
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color 0.3s ease;
+    }
+
+    .signup-link a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, #9b34eb, #6a11cb);
+      transition: width 0.3s ease;
+    }
+
+    .signup-link a:hover {
+      color: #871ee2;
+    }
+
+    .signup-link a:hover::after {
+      width: 100%;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 30px 20px;
+        border-radius: 15px;
+      }
+      
+      .login-container h2 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background bubbles -->
+  <div id="bubbles-container"></div>
+  
+  <div class="login-container">
+    <h2>Parent Login</h2>
+    <form>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email" />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" />
+      </div>
+
+      <button type="submit" class="login-button">Login</button>
+    </form>
+
+    <button class="google-button">
+      <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo" />
+      Continue with Google
+    </button>
+
+    <p class="signup-link">Don't have an account? <a href="parentsignup.html">Signup</a></p>
+  </div>
+
+  <script>
+    // Create animated background bubbles
+    function createBubbles() {
+      const container = document.getElementById('bubbles-container');
+      const bubbleCount = 15;
+      
+      for (let i = 0; i < bubbleCount; i++) {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        
+        // Random size between 20px and 100px
+        const size = Math.random() * 80 + 20;
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        
+        // Random position
+        bubble.style.left = `${Math.random() * 100}%`;
+        bubble.style.top = `${Math.random() * 100 + 100}%`;
+        
+        // Random animation duration
+        const duration = Math.random() * 20 + 15;
+        bubble.style.animationDuration = `${duration}s`;
+        
+        // Random animation delay
+        bubble.style.animationDelay = `${Math.random() * 5}s`;
+        
+        // Slightly different opacity for variety
+        bubble.style.opacity = Math.random() * 0.1 + 0.05;
+        
+        container.appendChild(bubble);
+      }
+    }
+    
+    // Form submission handling
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      // Simple validation
+      if (!email || !password) {
+        alert('Please fill in both email and password fields.');
+        return;
+      }
+      
+      // In a real app, you would send this to a server
+      console.log('Login attempt with:', { email, password });
+      
+      // Show success message
+      const loginButton = document.querySelector('.login-button');
+      const originalText = loginButton.textContent;
+      loginButton.textContent = 'Logging in...';
+      loginButton.style.background = 'linear-gradient(to right, #4CAF50, #45a049)';
+      
+      setTimeout(() => {
+        loginButton.textContent = 'Login Successful!';
+        loginButton.style.background = 'linear-gradient(to right, #4CAF50, #45a049)';
+        
+        setTimeout(() => {
+          loginButton.textContent = originalText;
+          loginButton.style.background = 'linear-gradient(to right, #9b34eb, #871ee2)';
+        }, 1500);
+      }, 1500);
+    });
+    
+    // Google button click handling
+    document.querySelector('.google-button').addEventListener('click', function() {
+      const googleButton = this;
+      const originalText = googleButton.textContent;
+      googleButton.textContent = 'Redirecting to Google...';
+      googleButton.style.background = '#f1f1f1';
+      
+      setTimeout(() => {
+        googleButton.textContent = originalText;
+        googleButton.style.background = 'white';
+        alert('In a real application, this would redirect to Google OAuth.');
+      }, 1500);
+    });
+    
+    // Initialize bubbles when page loads
+    window.addEventListener('DOMContentLoaded', createBubbles);
+  </script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Form</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #9333ea 0%, #7e22ce 25%, #6b21a8 50%, #9333ea 100%);
+      background-size: 400% 400%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      animation: gradientShift 15s ease infinite;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Background pattern overlay */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 30%);
+      z-index: 0;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.2),
+        0 5px 15px rgba(0, 0, 0, 0.1),
+        inset 0 0 1px rgba(255, 255, 255, 0.8);
+      width: 100%;
+      max-width: 420px;
+      z-index: 1;
+      position: relative;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transform: translateY(0);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .container:hover {
+      transform: translateY(-5px);
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.25),
+        0 10px 20px rgba(0, 0, 0, 0.15),
+        inset 0 0 1px rgba(255, 255, 255, 0.8);
+    }
+
+    h2 {
+      text-align: center;
+      color: #7e22ce;
+      margin-bottom: 30px;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(to right, #9333ea, #7e22ce);
+      border-radius: 2px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #7e22ce;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.3px;
+      transition: color 0.3s ease;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e9d5ff;
+      border-radius: 10px;
+      color: #4c1d95;
+      font-size: 1rem;
+      margin-bottom: 24px;
+      box-sizing: border-box;
+      background-color: rgba(255, 255, 255, 0.9);
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(147, 51, 234, 0.05);
+    }
+
+    input:hover {
+      border-color: #c084fc;
+      background-color: #ffffff;
+      box-shadow: 0 4px 10px rgba(147, 51, 234, 0.1);
+      transform: translateY(-2px);
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #9333ea;
+      box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.2), 0 4px 15px rgba(147, 51, 234, 0.15);
+      transform: translateY(-2px);
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(to right, #9333ea, #7e22ce);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
+    }
+
+    button[type="submit"]:hover {
+      background: linear-gradient(to right, #7e22ce, #6b21a8);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(147, 51, 234, 0.4);
+      letter-spacing: 1px;
+    }
+
+    button[type="submit"]:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 10px rgba(147, 51, 234, 0.3);
+    }
+
+    button[type="submit"]::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s ease;
+    }
+
+    button[type="submit"]:hover::after {
+      left: 100%;
+    }
+
+    /* Google Button */
+    .google-button {
+      width: 100%;
+      padding: 16px;
+      background-color: #ffffff;
+      color: #4c1d95;
+      border: 2px solid #d8b4fe;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-weight: 600;
+      margin-top: 16px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 10px rgba(216, 180, 254, 0.2);
+    }
+
+    .google-button:hover {
+      background-color: #f8f0ff;
+      border-color: #9333ea;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(216, 180, 254, 0.4);
+      letter-spacing: 1px;
+    }
+
+    .google-button:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 10px rgba(216, 180, 254, 0.2);
+    }
+
+    .google-button img {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .google-button:hover img {
+      transform: scale(1.1);
+    }
+
+    .login-link {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #6b7280;
+    }
+
+    .login-link a {
+      color: #7e22ce;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color 0.3s ease;
+    }
+
+    .login-link a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, #9333ea, #7e22ce);
+      transition: width 0.3s ease;
+    }
+
+    .login-link a:hover {
+      color: #6b21a8;
+    }
+
+    .login-link a:hover::after {
+      width: 100%;
+    }
+
+    .back-link {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .back-link a {
+      color: #9b34eb;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .back-link a:hover {
+      color: #7e22ce;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .back-link a::before {
+      content: "←";
+      font-weight: bold;
+      transition: transform 0.3s ease;
+    }
+
+    .back-link a:hover::before {
+      transform: translateX(-3px);
+    }
+
+    /* Floating elements in background */
+    .floating-element {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      z-index: 0;
+      animation: float 20s infinite linear;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 25px;
+        margin: 20px;
+      }
+      
+      h2 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating background elements -->
+  <div class="floating-element" style="width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: 0s;"></div>
+  <div class="floating-element" style="width: 120px; height: 120px; top: 70%; left: 80%; animation-delay: -5s; animation-duration: 25s;"></div>
+  <div class="floating-element" style="width: 60px; height: 60px; top: 20%; left: 85%; animation-delay: -10s; animation-duration: 30s;"></div>
+  <div class="floating-element" style="width: 100px; height: 100px; top: 80%; left: 15%; animation-delay: -15s; animation-duration: 35s;"></div>
+
+  <div class="container">
+    <h2>Student Signup</h2>
+    <form id="studentForm">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required pattern="[A-Za-z\s]+" />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required />
+
+      <button type="submit">Signup</button>
+
+      <!-- Google Button -->
+      <button type="button" class="google-button">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" />
+        Continue with Google
+      </button>
+    </form>
+
+    <div class="login-link">
+      Already have an account? <a href="studentlogin.html">Login</a>
+      <p class="back-link"><a href="home.html"><b>Back to Homepage</b></a></p>
+    </div>
+  </div>
+
+  <!-- ✅ Added Validation Script -->
+  <script>
+    document.getElementById("studentForm").addEventListener("submit", function(event) {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      // ✅ Name validation — only letters and spaces allowed
+      const namePattern = /^[A-Za-z\s]+$/;
+      if (!namePattern.test(name)) {
+        alert("Name must contain only letters (no numbers or special characters).");
+        event.preventDefault();
+        return;
+      }
+
+      // Email validation
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!email.match(emailPattern)) {
+        alert("Please enter a valid email address.");
+        event.preventDefault();
+        return;
+      }
+
+      // Password validation
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        event.preventDefault();
+        return;
+      }
+
+      alert("Form submitted successfully!");
+    });
+
+    // Add floating elements dynamically
+    document.addEventListener('DOMContentLoaded', function() {
+      const body = document.querySelector('body');
+      const colors = ['rgba(255,255,255,0.08)', 'rgba(255,255,255,0.05)', 'rgba(255,255,255,0.12)'];
+      
+      for (let i = 0; i < 12; i++) {
+        const element = document.createElement('div');
+        element.classList.add('floating-element');
+        
+        const size = Math.random() * 60 + 40;
+        const left = Math.random() * 100;
+        const delay = Math.random() * -20;
+        const duration = Math.random() * 20 + 20;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        element.style.width = `${size}px`;
+        element.style.height = `${size}px`;
+        element.style.left = `${left}%`;
+        element.style.top = `${Math.random() * 100 + 100}%`;
+        element.style.animationDelay = `${delay}s`;
+        element.style.animationDuration = `${duration}s`;
+        element.style.background = color;
+        
+        body.appendChild(element);
+      }
+    });
+  </script>
+</body>
+</html>

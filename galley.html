@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Gallery</title>
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #9b59b6;
+            --accent-color: #e2b4ff;
+            --light-color: #f9f0ff;
+            --dark-color: #4b0082;
+            --text-color: #333;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(106, 13, 173, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f9f0ff 0%, #e6d4f7 50%, #f3e9ff 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(155, 89, 182, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(106, 13, 173, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 40% 40%, rgba(226, 180, 255, 0.08) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 50px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: var(--white);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        header:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(106, 13, 173, 0.25);
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: float 20s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes float {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+        
+        .filter-btn {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, var(--white), #f8f0ff);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.7s ease;
+            z-index: -1;
+        }
+        
+        .filter-btn:hover::before {
+            left: 100%;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(106, 13, 173, 0.3);
+            border-color: transparent;
+        }
+        
+        .filter-btn.active {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(106, 13, 173, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(106, 13, 173, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(106, 13, 173, 0); }
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            aspect-ratio: 4/3;
+            background: var(--white);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(106, 13, 173, 0.4);
+            z-index: 10;
+        }
+        
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(106, 13, 173, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 2;
+        }
+        
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.15) rotate(2deg);
+            filter: brightness(1.1) contrast(1.1);
+        }
+        
+        .gallery-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s ease;
+        }
+        
+        .gallery-item:hover .gallery-video {
+            transform: scale(1.1);
+            filter: brightness(1.05);
+        }
+        
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(106, 13, 173, 0.95), transparent);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+            z-index: 3;
+        }
+        
+        .gallery-item:hover .video-controls {
+            transform: translateY(0);
+        }
+        
+        .video-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--primary-color);
+            font-size: 18px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .video-btn:hover {
+            background: var(--white);
+            transform: scale(1.1);
+            color: var(--dark-color);
+        }
+        
+        .video-time {
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 500;
+            margin-left: auto;
+            min-width: 90px;
+        }
+        
+        .volume-control {
+            width: 80px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .volume-slider {
+            width: 100%;
+            height: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            outline: none;
+            cursor: pointer;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--white);
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+            cursor: pointer;
+        }
+        
+        .volume-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: var(--white);
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+            cursor: pointer;
+        }
+        
+        .volume-slider::-webkit-slider-runnable-track {
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            border-radius: 3px;
+        }
+        
+        .progress-bar {
+            flex-grow: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            cursor: pointer;
+            margin: 0 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--white));
+            width: 0%;
+            border-radius: 2px;
+            transition: width 0.1s linear;
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(106, 13, 173, 0.95), transparent);
+            color: var(--white);
+            padding: 25px;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 3;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        .caption-title {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .gallery-caption p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        
+        /* Video Container Styling */
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(106, 13, 173, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+        
+        .gallery-item:hover .video-overlay {
+            opacity: 1;
+        }
+        
+        .play-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--primary-color);
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+        
+        .gallery-item:hover .play-icon {
+            transform: scale(1);
+        }
+        
+        .play-icon:hover {
+            background: var(--white);
+            transform: scale(1.1);
+            color: var(--dark-color);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .filter-buttons {
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .video-controls {
+                padding: 15px;
+                gap: 10px;
+            }
+            
+            .volume-control {
+                width: 60px;
+            }
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--light-color);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--secondary-color), var(--primary-color));
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Our School Gallery</h1>
+            <p class="subtitle">Capturing Memories, Building Futures</p>
+        </header>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="events">Events</button>
+            <button class="filter-btn" data-filter="classroom">ICT Lab</button>
+            <button class="filter-btn" data-filter="sports">Sports</button>
+            <button class="filter-btn" data-filter="arts">Building & Agriculture</button>
+            <button class="filter-btn" data-filter="video"><a href="video.html" style="text-decoration: none;">Video</a></button>
+        </div>
+        
+        <div class="gallery">
+            <!-- All Your Images Included -->
+            <div class="gallery-item" data-category="events">
+                <img src="26.jpg" alt="School Ceremony" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Event</h3>
+                    <p>Memorable moments from school activities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="events">
+                <img src="55.jpg" alt="School Ceremony" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Event</h3>
+                    <p>Memorable moments from school activities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="events">
+                <img src="56.jpg" alt="School Ceremony" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Event</h3>
+                    <p>Memorable moments from school activities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="events">
+                <img src="57.jpg" alt="School Ceremony" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Event</h3>
+                    <p>Memorable moments from school activities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="events">
+                <img src="1.jpg" alt="School Ceremony" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Event</h3>
+                    <p>Memorable moments from school activities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="events">
+                <img src="30.jpg" alt="School Ceremony" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Event</h3>
+                    <p>Memorable moments from school activities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="events">
+                <img src="11.jpg" alt="School Ceremony" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Event</h3>
+                    <p>Memorable moments from school activities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="events">
+                <img src="12.jpg" alt="School Ceremony" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Event</h3>
+                    <p>Memorable moments from school activities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="events">
+                <img src="13.jpg" alt="School Ceremony" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Event</h3>
+                    <p>Memorable moments from school activities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="events">
+                <img src="14.jpg" alt="School Ceremony" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Event</h3>
+                    <p>Memorable moments from school activities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="events">
+                <img src="15.jpg" alt="School Ceremony" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Event</h3>
+                    <p>Memorable moments from school activities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="events">
+                <img src="16.jpg" alt="School Ceremony" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Event</h3>
+                    <p>Memorable moments from school activities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="events">
+                <img src="58.jpg" alt="School Ceremony" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Event</h3>
+                    <p>Memorable moments from school activities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="events">
+                <img src="27.jpg" alt="School Ceremony" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">Annual Day Celebration</h3>
+                    <p>Our students performing on stage</p>
+                </div>
+            </div>
+            
+            <!-- ICT Lab Images -->
+            <div class="gallery-item" data-category="classroom">
+                <img src="62.jpg" alt="ICT Lab" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">ICT Lab</h3>
+                    <p>Modern computer lab facilities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="classroom">
+                <img src="98.jpg" alt="Classroom" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">ICT Lab</h3>
+                    <p>Modern computer lab facilities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="classroom">
+                <img src="99.jpg" alt="Classroom" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">ICT Lab</h3>
+                    <p>Modern computer lab facilities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="classroom">
+                <img src="100.jpg" alt="Classroom" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">ICT Lab</h3>
+                    <p>Modern computer lab facilities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="classroom">
+                <img src="111.jpg" alt="Classroom" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">ICT Lab</h3>
+                    <p>Modern computer lab facilities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="classroom">
+                <img src="112.jpg" alt="Classroom" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">ICT Lab</h3>
+                    <p>Modern computer lab facilities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="classroom">
+                <img src="80.jpg" alt="Classroom" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">Interactive Learning</h3>
+                    <p>Students engaged in classroom activities</p>
+                </div>
+            </div>
+            
+            <!-- Sports Images -->
+            <div class="gallery-item" data-category="sports">
+                <img src="22.jpg" alt="Sports Day" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">Sports Day 2023</h3>
+                    <p>Annual inter-house sports competition</p>
+                </div>
+            </div>
+            
+            <!-- Building & Agriculture Images -->
+            <div class="gallery-item" data-category="arts">
+                <img src="67.jpg" alt="Building" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Building</h3>
+                    <p>Modern infrastructure and facilities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="arts">
+                <img src="82.jpg" alt="Agriculture" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">Agriculture</h3>
+                    <p>Hands-on learning in agriculture</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="arts">
+                <img src="83.jpg" alt="Art Exhibition" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">Art Exhibition</h3>
+                    <p>Showcasing student creativity</p>
+                </div>
+            </div>
+            
+            <!-- More Events Images -->
+            <div class="gallery-item" data-category="events">
+                <img src="74.jpg" alt="Graduation" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">Graduation Day</h3>
+                    <p>Class of 2023 moving forward</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="events">
+                <img src="75.jpg" alt="Graduation" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">Graduation Day</h3>
+                    <p>Class of 2023 moving forward</p>
+                </div>
+            </div>
+            
+            <!-- More Sports Images -->
+            <div class="gallery-item" data-category="sports">
+                <img src="96.jpg" alt="Basketball" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">Basketball Tournament</h3>
+                    <p>Inter-school championship</p>
+                </div>
+            </div>
+            
+            <!-- More Building & Agriculture Images -->
+            <div class="gallery-item" data-category="arts">
+                <img src="31.jpg" alt="Building" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Campus</h3>
+                    <p>Beautiful school environment</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="arts">
+                <img src="88.jpg" alt="Agriculture" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">Agriculture Project</h3>
+                    <p>Student agricultural projects</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="arts">
+                <img src="90.jpg" alt="Building" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Infrastructure</h3>
+                    <p>Modern learning facilities</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="arts">
+                <img src="97.jpg" alt="Agriculture" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">Agricultural Learning</h3>
+                    <p>Practical farming education</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="arts">
+                <img src="78.jpg" alt="Building" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Premises</h3>
+                    <p>Well-maintained campus</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="arts">
+                <img src="63.jpg" alt="Building" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Architecture</h3>
+                    <p>Modern architectural design</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="arts">
+                <img src="64.jpg" alt="Agriculture" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">Farm Activities</h3>
+                    <p>Hands-on agricultural training</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="arts">
+                <img src="65.jpg" alt="Building" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">Campus View</h3>
+                    <p>Beautiful school surroundings</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="arts">
+                <img src="66.jpg" alt="Agriculture" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">Agricultural Education</h3>
+                    <p>Learning sustainable farming</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="arts">
+                <img src="77.jpg" alt="Music" class="gallery-img">
+                <div class="gallery-caption">
+                    <h3 class="caption-title">Music Recital</h3>
+                    <p>Annual music performance night</p>
+                </div>
+            </div>
+            
+            <!-- Video Items - You can add your own videos here -->
+            <div class="gallery-item" data-category="video">
+                <div class="video-container">
+                    <video class="gallery-video" poster="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80">
+                        <source src="1.mp4.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-overlay">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-controls">
+                        <button class="video-btn play-pause">▶</button>
+                        <div class="progress-bar">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="volume-control">
+                            <input type="range" class="volume-slider" min="0" max="100" value="100">
+                        </div>
+                        <div class="video-time">0:00 / 0:00</div>
+                        <button class="video-btn fullscreen">⛶</button>
+                    </div>
+                </div>
+                <div class="gallery-caption">
+                    <h3 class="caption-title">School Annual Day 2023</h3>
+                    <p>Highlights from our spectacular annual day celebration</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="video">
+                <div class="video-container">
+                    <video class="gallery-video" poster="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80">
+                        <source src="2.mp4.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-overlay">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-controls">
+                        <button class="video-btn play-pause">▶</button>
+                        <div class="progress-bar">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="volume-control">
+                            <input type="range" class="volume-slider" min="0" max="100" value="100">
+                        </div>
+                        <div class="video-time">0:00 / 0:00</div>
+                        <button class="video-btn fullscreen">⛶</button>
+                    </div>
+                </div>
+                <div class="gallery-caption">
+                    <h3 class="caption-title">Sports Championship 2023</h3>
+                    <p>Complete coverage of our annual sports championship</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 Our School. All Rights Reserved.</p>
+            <p style="margin-top: 10px; opacity: 0.9;">Proudly showcasing our school's journey and achievements</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            // Filter items
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    // Filter items
+                    galleryItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                            }, 100);
+                        } else {
+                            item.style.opacity = '0';
+                            item.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                item.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+            
+            // Video controls functionality
+            const videos = document.querySelectorAll('.gallery-video');
+            const playButtons = document.querySelectorAll('.play-pause');
+            const fullscreenButtons = document.querySelectorAll('.fullscreen');
+            const playIcons = document.querySelectorAll('.play-icon');
+            const timeDisplays = document.querySelectorAll('.video-time');
+            const volumeSliders = document.querySelectorAll('.volume-slider');
+            const progressBars = document.querySelectorAll('.progress');
+            const progressContainers = document.querySelectorAll('.progress-bar');
+            
+            videos.forEach((video, index) => {
+                const playBtn = playButtons[index];
+                const fullscreenBtn = fullscreenButtons[index];
+                const playIcon = playIcons[index];
+                const timeDisplay = timeDisplays[index];
+                const volumeSlider = volumeSliders[index];
+                const progress = progressBars[index];
+                const progressContainer = progressContainers[index];
+                
+                // Format time helper function
+                function formatTime(seconds) {
+                    const minutes = Math.floor(seconds / 60);
+                    const secs = Math.floor(seconds % 60);
+                    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+                }
+                
+                // Update time display
+                function updateTimeDisplay() {
+                    const currentTime = formatTime(video.currentTime);
+                    const duration = formatTime(video.duration);
+                    timeDisplay.textContent = `${currentTime} / ${duration}`;
+                    progress.style.width = (video.currentTime / video.duration * 100) + '%';
+                }
+                
+                // Play/Pause functionality
+                playBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    togglePlay();
+                });
+                
+                // Click video to play/pause
+                video.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    togglePlay();
+                });
+                
+                // Play icon click
+                playIcon.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    video.play();
+                    playBtn.innerHTML = '❚❚';
+                    playIcon.style.opacity = '0';
+                });
+                
+                // Toggle play/pause function
+                function togglePlay() {
+                    if (video.paused) {
+                        video.play();
+                        playBtn.innerHTML = '❚❚';
+                        playIcon.style.opacity = '0';
+                    } else {
+                        video.pause();
+                        playBtn.innerHTML = '▶';
+                        playIcon.style.opacity = '1';
+                    }
+                }
+                
+                // Volume control
+                volumeSlider.addEventListener('input', (e) => {
+                    video.volume = e.target.value / 100;
+                    video.muted = e.target.value == 0;
+                });
+                
+                // Volume slider visual update
+                volumeSlider.addEventListener('input', function() {
+                    const value = this.value;
+                    const min = this.min || 0;
+                    const max = this.max || 100;
+                    const percent = ((value - min) / (max - min)) * 100;
+                    this.style.background = `linear-gradient(90deg, var(--accent-color) 0%, var(--primary-color) ${percent}%, rgba(255, 255, 255, 0.3) ${percent}%)`;
+                });
+                
+                // Initialize volume slider background
+                volumeSlider.style.background = `linear-gradient(90deg, var(--accent-color) 0%, var(--primary-color) 100%)`;
+                
+                // Progress bar click
+                progressContainer.addEventListener('click', (e) => {
+                    const rect = progressContainer.getBoundingClientRect();
+                    const pos = (e.clientX - rect.left) / rect.width;
+                    video.currentTime = pos * video.duration;
+                });
+                
+                // Fullscreen functionality
+                fullscreenBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleFullscreen(video.parentElement);
+                });
+                
+                function toggleFullscreen(element) {
+                    if (!document.fullscreenElement) {
+                        if (element.requestFullscreen) {
+                            element.requestFullscreen();
+                        } else if (element.webkitRequestFullscreen) {
+                            element.webkitRequestFullscreen();
+                        } else if (element.msRequestFullscreen) {
+                            element.msRequestFullscreen();
+                        }
+                        fullscreenBtn.innerHTML = '✕';
+                    } else {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        } else if (document.webkitExitFullscreen) {
+                            document.webkitExitFullscreen();
+                        } else if (document.msExitFullscreen) {
+                            document.msExitFullscreen();
+                        }
+                        fullscreenBtn.innerHTML = '⛶';
+                    }
+                }
+                
+                // Update time display periodically
+                video.addEventListener('timeupdate', updateTimeDisplay);
+                
+                // Update duration when metadata is loaded
+                video.addEventListener('loadedmetadata', updateTimeDisplay);
+                
+                // Show play icon when video ends
+                video.addEventListener('ended', () => {
+                    playBtn.innerHTML = '▶';
+                    playIcon.style.opacity = '1';
+                    progress.style.width = '100%';
+                });
+                
+                // Spacebar to play/pause when video is focused
+                video.addEventListener('keydown', (e) => {
+                    if (e.code === 'Space') {
+                        e.preventDefault();
+                        togglePlay();
+                    }
+                });
+            });
+            
+            // Hover effect for all gallery items
+            galleryItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    item.style.zIndex = '100';
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    setTimeout(() => {
+                        item.style.zIndex = '1';
+                    }, 300);
+                });
+            });
+            
+            // Exit fullscreen when ESC is pressed
+            document.addEventListener('fullscreenchange', function() {
+                if (!document.fullscreenElement) {
+                    document.querySelectorAll('.fullscreen').forEach(btn => {
+                        btn.innerHTML = '⛶';
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayer Amba · grade 9-12 natural & social science</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ... (All existing styles kept exactly as provided) ... */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: linear-gradient(145deg, #f5f0ff 0%, #ede7f6 100%); color: #2d1b3c; line-height: 1.5; min-height: 100vh; padding: 1.5rem; display: flex; align-items: center; justify-content: center; }
+    .library-card { max-width: 1500px; width: 100%; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-radius: 3rem 3rem 2rem 2rem; box-shadow: 0 25px 50px -10px rgba(106, 13, 173, 0.3), 0 0 0 1px rgba(200, 180, 255, 0.4) inset; padding: 2rem 2.5rem; transition: all 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.7); }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 600; letter-spacing: -0.02em; }
+    h1 { font-size: 3.2rem; line-height: 1.1; margin-bottom: 0.5rem; }
+    h1 span { background: linear-gradient(145deg, #5f2b8c, #a855f7); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
+    .subhead { font-size: 1.2rem; color: #4b2e62; font-weight: 300; border-left: 5px solid #b37beb; padding-left: 1.5rem; margin: 1rem 0 2rem 0; background: rgba(230, 215, 255, 0.5); border-radius: 0 2rem 2rem 0; width: fit-content; padding: 0.8rem 2rem 0.8rem 1.5rem; backdrop-filter: blur(4px); }
+    .header-icon { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+    .logo-badge { background: #7b3fe4; color: white; font-size: 1.2rem; font-weight: 500; padding: 0.5rem 2rem; border-radius: 40px; box-shadow: 0 8px 18px #b38fdd; display: inline-flex; align-items: center; gap: 10px; }
+    .logo-badge i { font-size: 1.8rem; }
+    .stats-grid { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 2rem 0 2.5rem 0; }
+    .stat-item { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border: 1px solid rgba(180, 130, 255, 0.4); border-radius: 30px; padding: 0.8rem 2rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 10px 20px -8px rgba(149, 97, 219, 0.3); transition: all 0.2s; }
+    .stat-item:hover { background: white; border-color: #b77df2; transform: scale(1.02); }
+    .stat-icon { font-size: 2rem; color: #8a4fe0; }
+    .stat-number { font-size: 2rem; font-weight: 700; background: linear-gradient(145deg, #4b1e77, #9f5fe0); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1.2; }
+    .stat-label { font-size: 0.95rem; font-weight: 400; color: #3a2950; }
+    .search-section { background: rgba(235, 220, 255, 0.7); border-radius: 60px; padding: 0.3rem; margin: 2rem 0 2.5rem 0; display: flex; flex-wrap: wrap; border: 1px solid #d9b9ff; backdrop-filter: blur(5px); }
+    .search-section i { color: #9f6aeb; font-size: 1.4rem; margin-left: 1.5rem; align-self: center; }
+    .search-section input { flex: 1; min-width: 240px; background: transparent; border: none; padding: 1rem 0.8rem; font-size: 1.1rem; color: #2d114a; outline: none; }
+    .search-section input::placeholder { color: #9570b9; font-weight: 300; }
+    .search-section button { background: linear-gradient(115deg, #7f3de0, #aa6bf2); border: none; color: white; font-weight: 600; padding: 1rem 2.8rem; border-radius: 50px; font-size: 1.1rem; cursor: pointer; box-shadow: 0 10px 22px #c6abf0; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
+    .search-section button:hover { background: linear-gradient(115deg, #9143f0, #b77af2); box-shadow: 0 12px 26px #bba1f2; transform: translateY(-2px); }
+    .category-row { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 2rem 0 1.2rem 0; }
+    .cat-pill { background: rgba(240, 230, 255, 0.8); backdrop-filter: blur(3px); padding: 0.5rem 1.6rem; border-radius: 40px; font-size: 0.95rem; font-weight: 500; color: #411d66; border: 1px solid #d3b3ff; transition: all 0.2s; cursor: pointer; box-shadow: 0 4px 8px #e2d0ff; }
+    .cat-pill i { margin-right: 8px; color: #9b5fe0; }
+    .cat-pill:hover { background: white; border-color: #ad73f0; color: #381c5c; transform: translateY(-2px); }
+    .section-title { font-size: 2rem; margin: 2.8rem 0 1.2rem 0; position: relative; }
+    .section-title:after { content: ''; position: absolute; bottom: -10px; left: 0; width: 100px; height: 5px; background: linear-gradient(90deg, #ba8cff, #e5c3ff); border-radius: 4px; }
+    .grade-block { background: rgba(245, 235, 255, 0.5); border-radius: 2.5rem; padding: 1.8rem 2rem; margin-bottom: 2.5rem; border: 1px solid #e2c9ff; backdrop-filter: blur(4px); }
+    .grade-title { font-size: 2.2rem; font-weight: 700; display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem; color: #3e1b63; }
+    .grade-title i { font-size: 2.4rem; color: #ad6cf0; }
+    .subject-row { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 0.5rem 0 1.2rem 0; }
+    .subject-pill { background: #e7d7ff; border-radius: 30px; padding: 0.3rem 1.3rem; font-size: 0.9rem; font-weight: 500; color: #4b2b75; border: 1px solid #cbabff; }
+    .book-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 1.2rem; }
+    .list-item { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(4px); border-radius: 40px; padding: 0.7rem 1.2rem 0.7rem 1.8rem; display: flex; align-items: center; justify-content: space-between; border: 1px solid #dec1ff; transition: 0.15s; }
+    .list-item:hover { background: white; border-color: #b27ae8; box-shadow: 0 6px 14px #e1caff; }
+    .book-info { display: flex; flex-direction: column; }
+    .book-title { font-weight: 600; font-size: 1rem; color: #321f4a; }
+    .book-author { font-size: 0.75rem; color: #7650ac; }
+    .download-link { background: #f0e2ff; color: #6c34b6; border-radius: 30px; padding: 0.4rem 1rem; font-size: 0.8rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; border: 1px solid #caa5ff; transition: 0.2s; white-space: nowrap; }
+    .download-link i { font-size: 0.8rem; }
+    .download-link:hover { background: #ad73e8; color: white; border-color: #ad73e8; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem; }
+    .col { background: rgba(250, 240, 255, 0.3); border-radius: 2rem; padding: 1.2rem 1.5rem; border: 1px solid #e9d0ff; }
+    .col h3 { display: flex; align-items: center; gap: 10px; color: #562d8e; margin-bottom: 1rem; font-size: 1.6rem; }
+    .library-footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: 3rem; background: rgba(165, 115, 230, 0.18); border-radius: 2.5rem; padding: 1.8rem 2.2rem; border: 1px solid #e2c9ff; backdrop-filter: blur(10px); }
+    .footer-quote i { color: #a270e0; font-size: 2rem; margin-right: 0.8rem; }
+    .footer-quote p { font-style: italic; font-size: 1.2rem; font-weight: 400; color: #3f2670; max-width: 400px; }
+    .social-links a { display: inline-flex; background: white; color: #7429d1; width: 48px; height: 48px; border-radius: 30px; align-items: center; justify-content: center; font-size: 1.7rem; margin-left: 0.8rem; box-shadow: 0 10px 15px #d8bcf5; transition: 0.2s; text-decoration: none; }
+    .social-links a:hover { background: #9e62e0; color: white; transform: translateY(-5px); }
+    @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+    @media (max-width: 700px) { .library-card { padding: 1.5rem; } h1 { font-size: 2.5rem; } }
+    ::selection { background: #c397ff; color: #1f0f33; }
+  </style>
+</head>
+<body>
+<div class="library-card">
+  <div class="header-icon">
+    <div>
+      <h1><span>📖 Ayer Amba</span><br><span>Secondary</span> <span style="font-size:0.85em;">complete grade library</span></h1>
+    </div>
+    <div class="logo-badge"><i class="fas fa-book-open"></i> <span>grades 9-12</span></div>
+  </div>
+  <div class="subhead"><i class="fas fa-feather-alt" style="margin-right:0.7rem; color:#ae74ec;"></i> natural & social science · all books with download</div>
+
+  <div class="stats-grid">
+    <div class="stat-item"><i class="fas fa-leaf stat-icon"></i><div><span class="stat-number">140+</span> <span class="stat-label">natural sci.</span></div></div>
+    <div class="stat-item"><i class="fas fa-landmark stat-icon"></i><div><span class="stat-number">120+</span> <span class="stat-label">social sci.</span></div></div>
+    <div class="stat-item"><i class="fas fa-download stat-icon"></i><div><span class="stat-number">all</span> <span class="stat-label">free PDF</span></div></div>
+  </div>
+
+  <div class="search-section">
+    <i class="fas fa-search"></i>
+    <input type="text" id="librarySearch" placeholder="search by grade, subject or title...">
+    <button id="searchBtn"><i class="fas fa-arrow-right"></i> find</button>
+  </div>
+
+  <div class="category-row">
+    <span class="cat-pill" onclick="scrollToGrade('grade-12')"><i class="fas fa-graduation-cap"></i> grade 12</span>
+    <span class="cat-pill" onclick="scrollToGrade('grade-11')"><i class="fas fa-graduation-cap"></i> grade 11</span>
+    <span class="cat-pill" onclick="scrollToGrade('grade-10')"><i class="fas fa-graduation-cap"></i> grade 10</span>
+    <span class="cat-pill" onclick="scrollToGrade('grade-9')"><i class="fas fa-graduation-cap"></i> grade 9</span>
+  </div>
+
+  <div class="grade-block" id="grade-12">
+    <div class="grade-title"><i class="fas fa-star"></i> GRADE 12 📘</div>
+    <div class="two-col">
+      <div class="col">
+        <h3><i class="fas fa-flask" style="color:#9f5fe0;"></i> natural science – grade 12</h3>
+        <div class="subject-row">
+          <span class="subject-pill">biology</span><span class="subject-pill">physics</span><span class="subject-pill">chemistry</span><span class="subject-pill">English</span><span class="subject-pill">mathematics</span><span class="subject-pill">IT</span><span class="subject-pill">agriculture</span>
+        </div>
+        <div class="book-list">
+          <div class="list-item"><div class="book-info"><span class="book-title">Biology grade 12</span><span class="book-author">J. Mwangi</span></div><a href="grade-12-biology-new-curriculum--student-textbook-kehulumcom17599148324a02.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+          <div class="list-item"><div class="book-info"><span class="book-title">Physics grade 12</span><span class="book-author">P. Okonkwo</span></div><a href="grade-12-physics-new-curriculum--student-textbook-kehulumcom1759910068aff6.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+          <div class="list-item"><div class="book-info"><span class="book-title">Chemistry grade 12</span><span class="book-author">A. Mensah</span></div><a href="grade-12-chemistry-new-curriculum--student-textbook-kehulumcom1759915918b6bd.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+          <div class="list-item"><div class="book-info"><span class="book-title">English grade 12</span><span class="book-author">L. Akinyi</span></div><a href="grade-12-english-for-ethiopia-new-curriculum--student-textbook-kehulumcom1759915593b3b5.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+          <div class="list-item"><div class="book-info"><span class="book-title">Mathematics grade 12</span><span class="book-author">R. Zulu</span></div><a href="grade-12-mathematics-new-curriculum--student-textbook-kehulumcom17599122086bb1.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+          <div class="list-item"><div class="book-info"><span class="book-title">IT grade 12</span><span class=as fa"book-author">S. Ndlovu</span></div><a href="grade-12-information-technology-new-curriculum--student-textbook-kehulumcom1759915352faae.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+          <div class="list-item"><div class="book-info"><span class="book-title">Agriculture grade 12</span><span class="book-author">G. Ochieng</span></div><a href="grade-12-agriculure-new-curriculum--student-textbook-kehulumcom175991626076c1.pdf" class="download-link"><i class="f-download"></i> PDF</a></div>
+        </div>
+      </div>
+      <div class="col">
+        <h3><i class="fas fa-landmark" style="color:#b069f0;"></i> social science – grade 12</h3>
+        <div class="subject-row">
+          <span class="subject-pill">economics</span><span class="subject-pill">geography</span><span class="subject-pill">history</span>
+        </div>
+        <div class="book-list">
+          <div class="list-item"><div class="book-info"><span class="book-title">Economics grade 12</span><span class="book-author">M. Nkrumah</span></div><a href="grade-12-economics-new-curriculum--student-textbook-kehulumcom1759915712056d.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+          <div class="list-item"><div class="book-info"><span class="book-title">Geography grade 12</span><span class="book-author">F. Achieng</span></div><a href="grade-12-geography-new-curriculum--student-textbook-kehulumcom17599134797b34.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+          <div class="list-item"><div class="book-info"><span class="book-title">History grade 12</span><span class="book-author">D. Diop</span></div><a href="grade-12-history-new-curriculum--student-textbook-kehulumcom17599097897dd4.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grade-block" id="grade-11">
+    <div class="grade-title"><i class="fas fa-star"></i> GRADE 11 📗</div>
+    <div class="two-col">
+      <div class="col">
+        <h3><i class="fas fa-flask"></i> natural science – grade 11</h3>
+        <div class="subject-row"><span class="subject-pill">biology</span><span class="subject-pill">physics</span><span class="subject-pill">chemistry</span><span class="subject-pill">English</span><span class="subject-pill">mathematics</span><span class="subject-pill">IT</span><span class="subject-pill">agriculture</span></div>
+        <div class="book-list">
+          <div class="list-item"><div class="book-info"><span class="book-title">Biology grade 11</span><span class="book-author">J. Mwangi</span></div><a href="grade-11-biology-new-curriculum--student-textbook-kehulumcom1759924577039e.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+          <div class="list-item"><div class="book-info"><span class="book-title">Physics grade 11</span><span class="book-author">P. Okonkwo</span></div><a href="grade-11-physics-new-curriculum--student-textbook-kehulumcom17551049158ab7.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+          <div class="list-item"><div class="book-info"><span class="book-title">Chemistry grade 11</span><span class="book-author">A. Mensah</span></div><a href="grade-11-chemistry-new-curriculum--student-textbook-kehulumcom17599238964126.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+          <div class="list-item"><div class="book-info"><span class="book-title">English grade 11</span><span class="book-author">L. Akinyi</span></div><a href="grade-11-english-for-ethiopia-new-curriculum--student-textbook-kehulumcom175992307047b8.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+          <div class="list-item"><div class="book-info"><span class="book-title">Mathematics grade 11</span><span class="book-author">R. Zulu</span></div><a href="grade-11-mathematics-new-curriculum--student-textbook-kehulumcom1759919088fbdb.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+          <div class="list-item"><div class="book-info"><span class="book-title">IT grade 11</span><span class="book-author">S. Ndlovu</span></div><a href="grade-11-information-technology-new-curriculum--student-textbook-kehulumcom17599167591be6.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+          <div class="list-item"><div class="book-info"><span class="book-title">Agriculture grade 11</span><span class="book-author">G. Ochieng</span></div><a href="grade-11-agriculture-new-curriculum--student-textbook-kehulumcom17599249828b69.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        </div>
+      </div>
+      <div class="col">
+        <h3><i class="fas fa-landmark"></i> social science – grade 11</h3>
+        <div class="subject-row"><span class="subject-pill">economics</span><span class="subject-pill">geography</span><span class="subject-pill">history</span></div>
+        <div class="book-list">
+          <div class="list-item"><div class="book-info"><span class="book-title">Economics grade 11</span><span class="book-author">M. Nkrumah</span></div><a href="grade-11-economics-new-curriculum--student-textbook-kehulumcom17599236035876.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+          <div class="list-item"><div class="book-info"><span class="book-title">Geography grade 11</span><span class="book-author">F. Achieng</span></div><a href="grade-11-geography-new-curriculum--student-textbook-kehulumcom1759920987ac44.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+          <div class="list-item"><div class="book-info"><span class="book-title">History grade 11</span><span class="book-author">D. Diop</span></div><a href="grade-11-history-new-curriculum--student-textbook-kehulumcom17599198807fa3.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grade-block" id="grade-10">
+    <div class="grade-title"><i class="fas fa-star"></i> GRADE 10 📙</div>
+    <div class="col">
+      <h3><i class="fas fa-atlas"></i> general subjects – grade 10</h3>
+      <div class="subject-row">
+        <span class="subject-pill">biology</span><span class="subject-pill">physics</span><span class="subject-pill">chemistry</span><span class="subject-pill">English</span><span class="subject-pill">mathematics</span><span class="subject-pill">IT</span><span class="subject-pill">economics</span><span class="subject-pill">geography</span><span class="subject-pill">history</span><span class="subject-pill">amharic</span><span class="subject-pill">civics</span><span class="subject-pill">HPE</span>
+      </div>
+      <div class="book-list">
+        <div class="list-item"><div class="book-info"><span class="book-title">Biology grade 10</span><span class="book-author">J. Mwangi</span></div><a href="grade 10-biology_kehulumcom_d02c.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">Physics grade 10</span><span class="book-author">P. Okonkwo</span></div><a href="grade-10-physics-new-curriculum--student-textbook-kehulumcom17599255229e06.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">Chemistry grade 10</span><span class="book-author">A. Mensah</span></div><a href="grade-10-chemistry-new-curriculum--student-textbook-kehulumcom175992936186a3.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">English grade 10</span><span class="book-author">L. Akinyi</span></div><a href="grade-10-english-for-ethiopia-new-curriculum--student-textbook-kehulumcom1759928736fa82.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">Mathematics grade 10</span><span class="book-author">R. Zulu</span></div><a href="grade-10-mathematics-new-curriculum--student-textbook-kehulumcom1759925836e39e.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">IT grade 10</span><span class="book-author">S. Ndlovu</span></div><a href="grade-10-information-technology-new-curriculum--student-textbook-kehulumcom1759926369d9fc.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">Economics grade 10</span><span class="book-author">M. Nkrumah</span></div><a href="grade-10-economics-new-curriculum--student-textbook-kehulumcom1759928992f5b9.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">Geography grade 10</span><span class="book-author">F. Achieng</span></div><a href="grade-10-geography-new-curriculum--student-textbook-kehulumcom17599285581298.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">History grade 10</span><span class="book-author">D. Diop</span></div><a href="grade-10-history-new-curriculum--student-textbook-kehulumcom1759927358e997.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">Amharic grade 10</span><span class="book-author">Ethiopian Curriculum</span></div><a href="grade-10-amharic-new-curriculum--student-textbook-kehulumcom1759929798ed19.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">Civics grade 10</span><span class="book-author">Ethiopian Curriculum</span></div><a href="grade-10-citizenship-education-new-curriculum--student-textbook-kehulumcom1759929229d024.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">HPE grade 10</span><span class="book-author">Ethiopian Curriculum</span></div><a href="grade-10-health-and-physical-education-hpe-new-curriculum--student-textbook-kehulumcom17599270253739.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grade-block" id="grade-9">
+    <div class="grade-title"><i class="fas fa-star"></i> GRADE 9 📘</div>
+    <div class="col">
+      <h3><i class="fas fa-atlas"></i> general subjects – grade 9</h3>
+      <div class="subject-row">
+        <span class="subject-pill">biology</span><span class="subject-pill">physics</span><span class="subject-pill">chemistry</span><span class="subject-pill">English</span><span class="subject-pill">mathematics</span><span class="subject-pill">IT</span><span class="subject-pill">economics</span><span class="subject-pill">geography</span><span class="subject-pill">history</span><span class="subject-pill">amharic</span><span class="subject-pill">civics</span><span class="subject-pill">HPE</span>
+      </div>
+      <div class="book-list">
+        <div class="list-item"><div class="book-info"><span class="book-title">Biology grade 9</span><span class="book-author">J. Mwangi</span></div><a href="grade-9-biology-new-curriculum--student-textbook-kehulumcom17599334842417.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">Physics grade 9</span><span class="book-author">P. Okonkwo</span></div><a href="grade-9-physics-new-curriculum--student-textbook-kehulumcom1759930084a307.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">Chemistry grade 9</span><span class="book-author">A. Mensah</span></div><a href="grade-9-chemistry-new-curriculum--student-textbook-kehulumcom17599332397bc8.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">English grade 9</span><span class="book-author">L. Akinyi</span></div><a href="grade-9-english-for-ethiopia-new-curriculum--student-textbook-kehulumcom175993262346a1.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">Mathematics grade 9</span><span class="book-author">R. Zulu</span></div><a href="grade-9-mathematics-new-curriculum--student-textbook-_kehulum_com_0fa6.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">IT grade 9</span><span class="book-author">S. Ndlovu</span></div><a href="grade-9-information-technology-new-curriculum--student-textbook-kehulumcom1759930819ba23.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">Economics grade 9</span><span class="book-author">M. Nkrumah</span></div><a href="grade-9-economics-new-curriculum--student-textbook-kehulumcom1759932804ce76.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">Geography grade 9</span><span class="book-author">F. Achieng</span></div><a href="grade-9-geography-new-curriculum--student-textbook-kehulumcom1759931498f683.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">History grade 9</span><span class="book-author">D. Diop</span></div><a href="grade-9-history-new-curriculum--student-textbook-kehulumcom1759931286d445.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">Amharic grade 9</span><span class="book-author">Ethiopian Curriculum</span></div><a href="grade-9-amharic-new-curriculum--student-textbook-kehulumcom1759933673b3a1.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">Civics grade 9</span><span class="book-author">Ethiopian Curriculum</span></div><a href="grade-9-citizenship-education-new-curriculum--student-textbook-kehulumcom17599329642348.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+        <div class="list-item"><div class="book-info"><span class="book-title">HPE grade 9</span><span class="book-author">Ethiopian Curriculum</span></div><a href="grade-9-health-and-physical-education-hpe-new-curriculum--student-textbook-kehulumcom1759931015f4a8.pdf" class="download-link"><i class="fas fa-download"></i> PDF</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background: #efe3ff; padding: 1.2rem 2rem; border-radius: 60px; text-align: center; border:1px solid #c7a6fc; margin: 2rem 0;">
+    <i class="fas fa-cloud-download-alt" style="color:#883ff0; font-size:1.8rem; vertical-align: middle; margin-right:1rem;"></i>
+    <span style="font-weight:500; font-size:1.3rem; color:#441f75;">every book includes a direct download — click any PDF button</span>
+  </div>
+
+  <div class="library-footer">
+    <div class="footer-quote" style="display: flex; align-items: center;"><i class="fas fa-quote-right"></i><p>“A digital library is a bridge to dreams — Ayer Amba Secondary.”</p></div>
+    <div class="social-links"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-x-twitter">𝕏</i></a><a href="#"><i class="fab fa-github"></i></a><a href="#"><i class="fab fa-discord"></i></a></div>
+  </div>
+  <div style="text-align: right; margin-top:1.2rem; opacity:0.7; font-size:0.9rem; color:#693ab6;"><i class="fas fa-laptop"></i> Ayer Amba Secondary · grades 9-12 · download ready</div>
+</div>
+
+<script>
+  // Function to navigate to specific grade sections
+  function scrollToGrade(id) {
+    const element = document.getElementById(id);
+    if(element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  // Real-time Search Functionality
+  const searchInput = document.getElementById('librarySearch');
+  const bookItems = document.querySelectorAll('.list-item');
+  const gradeBlocks = document.querySelectorAll('.grade-block');
+
+  searchInput.addEventListener('input', function(e) {
+    const term = e.target.value.toLowerCase();
+    
+    bookItems.forEach(item => {
+      const title = item.querySelector('.book-title').textContent.toLowerCase();
+      const author = item.querySelector('.book-author').textContent.toLowerCase();
+      
+      if(title.includes(term) || author.includes(term)) {
+        item.style.display = 'flex';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    // Hide grade blocks if they have no visible books
+    gradeBlocks.forEach(block => {
+      const visibleBooks = block.querySelectorAll('.list-item[style="display: flex;"]').length;
+      const totalBooks = block.querySelectorAll('.list-item').length;
+      
+      // If search is empty, show all blocks. Otherwise, hide blocks with 0 results.
+      if(term === "") {
+        block.style.display = 'block';
+      } else {
+        block.style.display = visibleBooks > 0 ? 'block' : 'none';
+      }
+    });
+  });
+
+  // Search Button functionality
+  document.getElementById('searchBtn').addEventListener('click', () => {
+    searchInput.focus();
+    alert('Search is active! Just type in the bar to filter results.');
+  });
+</script>
+</body>
+</html>

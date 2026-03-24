@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Parent Signup</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #9b34eb 0%, #7b1fa2 50%, #4a148c 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated background elements */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+      z-index: 1;
+    }
+
+    .signup-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(155, 52, 235, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      width: 100%;
+      max-width: 420px;
+      box-sizing: border-box;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      transform: translateY(0);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .signup-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.2),
+        0 15px 40px rgba(155, 52, 235, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .signup-container h2 {
+      color: #9b34eb;
+      margin-bottom: 30px;
+      font-size: 28px;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+
+    .signup-container h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(to right, transparent, #9b34eb, transparent);
+      border-radius: 2px;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #9b34eb;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      transition: color 0.3s ease;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e6d4f7;
+      border-radius: 10px;
+      font-size: 15px;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+      background-color: #fbf9fd;
+      color: #333;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #9b34eb;
+      background-color: white;
+      box-shadow: 0 0 0 4px rgba(155, 52, 235, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .form-group input:hover {
+      border-color: #d3a9f5;
+      background-color: white;
+    }
+
+    .signup-button {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #9b34eb 0%, #871ee2 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 20px;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .signup-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .signup-button:hover {
+      background: linear-gradient(135deg, #871ee2 0%, #7a18d0 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(155, 52, 235, 0.3);
+    }
+
+    .signup-button:hover::before {
+      left: 100%;
+    }
+
+    .signup-button:active {
+      transform: translateY(-1px);
+      box-shadow: 0 5px 15px rgba(155, 52, 235, 0.3);
+    }
+
+    .google-button {
+      margin-top: 24px;
+      width: 100%;
+      padding: 14px;
+      border: 2px solid #e6d4f7;
+      border-radius: 10px;
+      background-color: white;
+      color: #9b34eb;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .google-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(155, 52, 235, 0.05) 0%, rgba(135, 30, 226, 0.05) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .google-button:hover {
+      border-color: #9b34eb;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(155, 52, 235, 0.15);
+    }
+
+    .google-button:hover::before {
+      opacity: 1;
+    }
+
+    .google-button img {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .google-button:hover img {
+      transform: scale(1.2) rotate(5deg);
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
+
+    .login-link, .back-link {
+      margin-top: 20px;
+      font-size: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-link a, .back-link a {
+      color: #9b34eb;
+      font-weight: 600;
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .login-link a::after, .back-link a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, #9b34eb, #d3a9f5);
+      border-radius: 1px;
+      transition: width 0.3s ease;
+    }
+
+    .login-link a:hover, .back-link a:hover {
+      color: #871ee2;
+    }
+
+    .login-link a:hover::after, .back-link a:hover::after {
+      width: 100%;
+    }
+
+    /* Floating animation for the container */
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .signup-container {
+      animation: float 6s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <h2>Parent Signup</h2>
+    <form id="parentForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <!-- Only letters allowed -->
+        <input type="text" id="name" placeholder="Enter your name" required pattern="[A-Za-z\s]+" />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email" required/>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required/>
+      </div>
+
+      <div class="form-group">
+        <label for="student-name">Student Name</label>
+        <!-- Only letters allowed (optional field) -->
+        <input type="text" id="student-name" placeholder="optional" pattern="[A-Za-z\s]*" />
+      </div>
+
+      <button type="submit" class="signup-button">Signup</button>
+    </form>
+
+    <button class="google-button">
+      <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo" />
+      Continue with Google
+    </button>
+
+    <p class="login-link">Already have an account? <a href="parentlogin.html">Login</a></p>
+    <p class="back-link"><a href="home.html">Back to Homepage</a></p>
+  </div>
+
+  <!-- ✅ Added Validation Script -->
+  <script>
+    document.getElementById("parentForm").addEventListener("submit", function(event) {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const studentName = document.getElementById("student-name").value.trim();
+
+      // ✅ Name validation — only letters and spaces
+      const namePattern = /^[A-Za-z\s]+$/;
+      if (!namePattern.test(name)) {
+        alert("Name must contain only letters (no numbers or special characters).");
+        event.preventDefault();
+        return;
+      }
+
+      // ✅ Student name validation (if entered)
+      if (studentName && !namePattern.test(studentName)) {
+        alert("Student name must contain only letters (no numbers or special characters).");
+        event.preventDefault();
+        return;
+      }
+
+      // ✅ Email validation
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!email.match(emailPattern)) {
+        alert("Please enter a valid email address.");
+        event.preventDefault();
+        return;
+      }
+
+      // ✅ Password validation
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        event.preventDefault();
+        return;
+      }
+
+      alert("Form submitted successfully!");
+    });
+  </script>
+</body>
+</html>

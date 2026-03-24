@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Educate Ethiopia - Empowering Education Choices</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #6a1b9a;
+            --primary-light: #9c4dcc;
+            --primary-dark: #38006b;
+            --secondary: #ffab00;
+            --accent: #ff4081;
+            --light: #f3e5f5;
+            --dark: #4a148c;
+            --text: #212121;
+            --text-light: #757575;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            background-color: #fafafa;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        header .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+        
+        .btn:hover {
+            background-color: #f50057;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 64, 129, 0.4);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+            box-shadow: none;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* About Section */
+        .about-section {
+            padding: 100px 0;
+            background-color: white;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.8rem;
+            color: var(--primary-dark);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            margin: 20px auto;
+            border-radius: 5px;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(106, 27, 154, 0.25);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+        
+        .about-image:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 35px 60px -15px rgba(106, 27, 154, 0.3);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Mission Vision */
+        .mission-vision {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            padding: 100px 0;
+            clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+            margin: -50px 0;
+        }
+        
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--secondary), var(--accent));
+        }
+        
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--primary-dark);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+        }
+        
+        .card i {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, var(--primary-light), var(--primary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Stats */
+        .stats {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+            margin-top: -50px;
+        }
+        
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 40px;
+        }
+        
+        .stat-item {
+            flex: 1;
+            min-width: 200px;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--secondary);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .stat-label {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        
+        /* Team */
+        .team {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .team-member {
+            width: 280px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+        
+        .member-image {
+            height: 280px;
+            overflow: hidden;
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+        
+        .member-info {
+            padding: 25px;
+        }
+        
+        .member-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--primary-dark);
+        }
+        
+        .member-info p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: var(--primary-light);
+            font-size: 1.2rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+        
+        /* Timeline */
+        .timeline-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+            margin: -50px 0;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: var(--primary-light);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+            padding-right: 70px;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 70px;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary);
+            border-radius: 50%;
+            top: 30px;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+        }
+        
+        .timeline-date {
+            color: var(--primary-dark);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .timeline-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-slide {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+            margin: 20px;
+            position: relative;
+        }
+        
+        .testimonial-slide::before {
+            content: '\201C';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: var(--light);
+            font-family: serif;
+            line-height: 1;
+            z-index: 0;
+        }
+        
+        .testimonial-content {
+            position: relative;
+            z-index: 1;
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* CTA */
+        .cta {
+            padding: 120px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            color: white;
+            clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+            margin-top: -50px;
+        }
+        
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+        }
+        
+        .footer-social {
+            margin: 20px 0;
+        }
+        
+        .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .timeline::before {
+                left: 40px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 90px;
+                padding-right: 25px;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-dot,
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+            
+            .stat-number {
+                font-size: 3rem;
+            }
+            
+            .cta h2 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container animate-on-scroll">
+            <h1>About Educate Ethiopia</h1>
+            <p class="tagline">Empowering parents, transforming education through information and community engagement</p>`
+            <div class="btn-group">
+                <a href="contact.html" class="btn">Get In Touch</a>
+                <a href="#mission" class="btn btn-secondary">Our Mission</a>
+            </div>
+        </div>
+    </header>
+    
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Our Story</h2>
+            <div class="about-content">
+                <div class="about-text animate-on-scroll">
+                    <p>At Educate Ethiopia, we believe that involvement in education is vital. Whether we are parents, community activists, teachers, principals, or decision makers, we all have a critical role to play in improving Ethiopia's education system.</p>
+                    
+                    <p>Our decisions and actions affect the education, health, and welfare of our children. By continuing to develop and promote the use of Educate Ethiopia, we are committed to doing what we can to provide parents across the country with information and analysis to help them make better-informed decisions about their child's education.</p>
+                    
+                    <p>Educate Ethiopia is the BIGGEST and MOST active Online School Directory in Ethiopia! We have been in operation since 2008, and we were the first online schools database in Ethiopia.</p>
+                    
+                    <p>Our platform bridges the gap between parents and educational institutions, creating a transparent ecosystem where information flows freely and decisions are made with confidence.</p>
+                </div>
+                <div class="about-image animate-on-scroll">
+                    <img src="26.jpg">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="mission-vision" id="mission">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Our Purpose</h2>
+            <div class="cards">
+                <div class="card animate-on-scroll">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Mission</h3>
+                    <p>To provide parents with up to date, relevant information and tools so they can choose the best school for their children, support their children's education, and improve schools in their local communities.</p>
+                </div>
+                <div class="card animate-on-scroll">
+                    <i class="fas fa-eye"></i>
+                    <h3>Vision</h3>
+                    <p>Educate Ethiopia aims to be the single largest guide for all schools in Ethiopia with both public and private schools, creating a transformative impact on the nation's education landscape.</p>
+                </div>
+                <div class="card animate-on-scroll">
+                    <i class="fas fa-heart"></i>
+                    <h3>Values</h3>
+                    <p>Transparency, Accessibility, Community, Innovation, and Excellence guide everything we do. We believe every child deserves access to quality education information.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="stats">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll" style="color: white;">Our Impact</h2>
+            <div class="stats-container">
+                <div class="stat-item animate-on-scroll">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Years of Service</div>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-label">Schools Listed</div>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <div class="stat-number">1M+</div>
+                    <div class="stat-label">Parents Served</div>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <div class="stat-number">First</div>
+                    <div class="stat-label">Online School Directory</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Our Team</h2>
+            <p class="text-center max-w-2xl mx-auto mb-16 animate-on-scroll" style="max-width: 700px;">Meet the passionate individuals behind Educate Ethiopia who work tirelessly to bridge the information gap in education</p>
+            <div class="team-members">
+                <div class="team-member animate-on-scroll">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Team Member">
+                    </div>
+                    <div class="member-info">
+                        <h4>Simon Abebe</h4>
+                        <p>Founder & CEO</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member animate-on-scroll">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Team Member">
+                    </div>
+                    <div class="member-info">
+                        <h4>Meron Tekle</h4>
+                        <p>Education Director</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member animate-on-scroll">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Team Member">
+                    </div>
+                    <div class="member-info">
+                        <h4>Yohannes Kassahun</h4>
+                        <p>Technology Lead</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="timeline-section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Our Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2008</div>
+                    <div class="timeline-content">
+                        <h3>Founded Educate Ethiopia</h3>
+                        <p>Launched as the first online school directory in Ethiopia with 200 schools listed.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2012</div>
+                    <div class="timeline-content">
+                        <h3>Mobile Platform Launch</h3>
+                        <p>Introduced mobile access to reach more parents across the country.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2015</div>
+                    <div class="timeline-content">
+                        <h3>10,000 Schools Milestone</h3>
+                        <p>Reached our goal of listing 10,000 schools nationwide.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2020</div>
+                    <div class="timeline-content">
+                        <h3>Parent Community Platform</h3>
+                        <p>Launched discussion forums and parent community features.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2023</div>
+                    <div class="timeline-content">
+                        <h3>1 Million Parents Served</h3>
+                        <p>Celebrated helping over 1 million parents make informed education choices.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">What Parents Say</h2>
+            <div class="testimonial-container animate-on-scroll">
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        "Educate Ethiopia helped me find the perfect school for my daughter. The detailed information and parent reviews made our decision so much easier. She's now thriving in her new school environment!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Testimonial Author">
+                        </div>
+                        <div class="author-info">
+                            <h4>Alemnesh Bekele</h4>
+                            <p>Parent, Addis Ababa</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2 class="animate-on-scroll">Join Us in Transforming Education</h2>
+            <p class="animate-on-scroll">Have questions, suggestions, or want to collaborate? We'd love to hear from you. Together, we can make a difference in Ethiopia's education system.</p>
+            <div class="btn-group animate-on-scroll">
+                <a href="mailto:simon@educateethiopia.org" class="btn">Email Us</a>
+                <a href="#" class="btn btn-secondary">Join Our Community</a>
+                <a href="#" class="btn btn-secondary">Partner With Us</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column animate-on-scroll">
+                    <h3>Educate Ethiopia</h3>
+                    <p>Empowering parents with information to make the best education choices for their children since 2008.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column animate-on-scroll">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="digitallibrary.html">Library</a></li>
+                        <li><a href="galley.html">Gallery</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column animate-on-scroll">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope mr-2"></i> simon@educateethiopia.org</p>
+                    <p><i class="fas fa-phone mr-2"></i> +251 911 234 567</p>
+                    <p><i class="fas fa-map-marker-alt mr-2"></i> Addis Ababa, Ethiopia</p>
+                </div>
+            </div>
+            <div class="footer-bottom animate-on-scroll">
+                <p>&copy; 2023 Educate Ethiopia. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
