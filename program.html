@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AYER AMBA SECONDARY SCHOOL - Academic Programs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-purple: #5c2d91;
+            --secondary-purple: #7e3ff2;
+            --light-purple: #d8c3ff;
+            --dark-purple: #3a1a6a;
+            --accent-gold: #ffc107;
+            --white: #ffffff;
+            --light-gray: #f9f6ff;
+            --text-dark: #2d2d2d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--dark-purple), var(--primary-purple));
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .school-name {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+        
+        .school-motto {
+            font-style: italic;
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        
+        .school-badge {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background-color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .school-badge i {
+            color: var(--primary-purple);
+            font-size: 2.5rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            color: var(--primary-purple);
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            position: relative;
+            font-weight: 600;
+        }
+        
+        .page-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(to right, var(--accent-gold), var(--secondary-purple));
+            margin: 15px auto;
+            border-radius: 3px;
+        }
+        
+        .programs-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .program-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .program-image {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.8rem;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .program-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(92, 45, 145, 0.85), rgba(126, 63, 242, 0.85));
+        }
+        
+        .program-image-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .program-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-gold);
+        }
+        
+        .program-content {
+            padding: 2rem;
+        }
+        
+        .program-title {
+            color: var(--primary-purple);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .program-description {
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .program-details {
+            list-style-type: none;
+            margin-bottom: 2rem;
+        }
+        
+        .program-details li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .program-details li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--secondary-purple);
+            margin-right: 10px;
+            font-size: 0.9rem;
+            margin-top: 3px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to right, var(--primary-purple), var(--secondary-purple));
+            color: var(--white);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(126, 63, 242, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(126, 63, 242, 0.4);
+            background: linear-gradient(to right, var(--secondary-purple), var(--primary-purple));
+        }
+        
+        .btn i {
+            margin-left: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .program-features {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .feature {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .feature-icon {
+            color: var(--secondary-purple);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .feature-label {
+            font-size: 0.8rem;
+            color: #777;
+            font-weight: 500;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, var(--dark-purple), var(--primary-purple));
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            position: relative;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer p {
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .contact-item i {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--white);
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: var(--accent-gold);
+            color: var(--dark-purple);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .school-name {
+                font-size: 2.2rem;
+            }
+            
+            .school-motto {
+                font-size: 1.1rem;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .programs-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="school-badge">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h1 class="school-name">AYER AMBA SECONDARY SCHOOL</h1>
+            <p class="school-motto">"Excellence Through Knowledge and Discipline"</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <h2 class="page-title">Our Academic Programs</h2>
+        
+        <div class="programs-container">
+            <!-- Original 3 Programs -->
+            <div class="program-card">
+                <div class="program-image">
+                    <div class="program-image-content">
+                        <i class="fas fa-atom program-icon"></i>
+                        <h3>SCIENCE PROGRAM</h3>
+                    </div>
+                </div>
+                <div class="program-content">
+                    <h3 class="program-title">Science & Technology</h3>
+                    <p class="program-description">Our comprehensive science program prepares students for careers in medicine, engineering, and technology fields through hands-on learning and research.</p>
+                    <ul class="program-details">
+                        <li>Advanced Mathematics and Physics</li>
+                        <li>Chemistry and Biology Laboratories</li>
+                        <li>Computer Science and Robotics</li>
+                        <li>Annual Science Fair participation</li>
+                    </ul>
+                    <div class="program-features">
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-flask"></i></div>
+                            <div class="feature-label">5 Labs</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-user-graduate"></i></div>
+                            <div class="feature-label">98% Pass Rate</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-trophy"></i></div>
+                            <div class="feature-label">15 Awards</div>
+                        </div>
+                    </div>
+                    <a href="science.html" class="btn">Explore Program <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-image">
+                    <div class="program-image-content">
+                        <i class="fas fa-paint-brush program-icon"></i>
+                        <h3>ARTS PROGRAM</h3>
+                    </div>
+                </div>
+                <div class="program-content">
+                    <h3 class="program-title">Arts & Humanities</h3>
+                    <p class="program-description">Explore creativity and critical thinking through our diverse arts and humanities curriculum designed to develop well-rounded individuals.</p>
+                    <ul class="program-details">
+                        <li>Literature and Creative Writing</li>
+                        <li>World History and Geography</li>
+                        <li>Visual and Performing Arts</li>
+                        <li>Philosophy and Social Sciences</li>
+                    </ul>
+                    <div class="program-features">
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-theater-masks"></i></div>
+                            <div class="feature-label">3 Studios</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-book-open"></i></div>
+                            <div class="feature-label">12 Electives</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-award"></i></div>
+                            <div class="feature-label">8 Publications</div>
+                        </div>
+                    </div>
+                    <a href="art.html" class="btn">Explore Program <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-image">
+                    <div class="program-image-content">
+                        <i class="fas fa-chart-line program-icon"></i>
+                        <h3>BUSINESS PROGRAM</h3>
+                    </div>
+                </div>
+                <div class="program-content">
+                    <h3 class="program-title">Business Studies</h3>
+                    <p class="program-description">Develop entrepreneurial skills and business acumen for the modern economy through practical learning and real-world applications.</p>
+                    <ul class="program-details">
+                        <li>Accounting and Financial Management</li>
+                        <li>Business Administration</li>
+                        <li>Economics and Market Analysis</li>
+                        <li>Entrepreneurship Development</li>
+                    </ul>
+                    <div class="program-features">
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-briefcase"></i></div>
+                            <div class="feature-label">20 Partners</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+                            <div class="feature-label">Internships</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
+                            <div class="feature-label">Startup Incubator</div>
+                        </div>
+                    </div>
+                    <a href="business.html" class="btn">Explore Program <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- 6 New Programs -->
+            <div class="program-card">
+                <div class="program-image">
+                    <div class="program-image-content">
+                        <i class="fas fa-laptop-code program-icon"></i>
+                        <h3>ICT PROGRAM</h3>
+                    </div>
+                </div>
+                <div class="program-content">
+                    <h3 class="program-title">Information Technology</h3>
+                    <p class="program-description">Master digital technologies with our cutting-edge ICT program that prepares students for careers in software development and IT management.</p>
+                    <ul class="program-details">
+                        <li>Programming and Web Development</li>
+                        <li>Database Management Systems</li>
+                        <li>Network Administration</li>
+                        <li>Cybersecurity Fundamentals</li>
+                    </ul>
+                    <div class="program-features">
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-server"></i></div>
+                            <div class="feature-label">Tech Lab</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-code"></i></div>
+                            <div class="feature-label">Hackathons</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                            <div class="feature-label">AI Club</div>
+                        </div>
+                    </div>
+                    <a href="it.html" class="btn">Explore Program <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-image">
+                    <div class="program-image-content">
+                        <i class="fas fa-leaf program-icon"></i>
+                        <h3>ENVIRONMENTAL SCIENCE</h3>
+                    </div>
+                </div>
+                <div class="program-content">
+                    <h3 class="program-title">Environmental Studies</h3>
+                    <p class="program-description">Explore sustainable solutions to environmental challenges through our interdisciplinary program combining science, policy, and activism.</p>
+                    <ul class="program-details">
+                        <li>Ecology and Conservation Biology</li>
+                        <li>Environmental Chemistry</li>
+                        <li>Sustainable Development</li>
+                        <li>Climate Change Studies</li>
+                    </ul>
+                    <div class="program-features">
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-tree"></i></div>
+                            <div class="feature-label">Green Campus</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-recycle"></i></div>
+                            <div class="feature-label">Eco Projects</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-seedling"></i></div>
+                            <div class="feature-label">Organic Farm</div>
+                        </div>
+                    </div>
+                    <a href="ENVIRONMENT.HTML" class="btn">Explore Program <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-image">
+                    <div class="program-image-content">
+                        <i class="fas fa-medal program-icon"></i>
+                        <h3>SPORTS ACADEMY</h3>
+                    </div>
+                </div>
+                <div class="program-content">
+                    <h3 class="program-title">Sports Excellence</h3>
+                    <p class="program-description">Combine athletic training with academic excellence in our sports academy that develops both physical prowess and mental discipline.</p>
+                    <ul class="program-details">
+                        <li>Professional Coaching in 8 Sports</li>
+                        <li>Sports Science and Nutrition</li>
+                        <li>Injury Prevention and Management</li>
+                        <li>Competition and Tournament Play</li>
+                    </ul>
+                    <div class="program-features">
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-running"></i></div>
+                            <div class="feature-label">Olympic Pool</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-trophy"></i></div>
+                            <div class="feature-label">25 Championships</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-user-md"></i></div>
+                            <div class="feature-label">Sports Clinic</div>
+                        </div>
+                    </div>
+                    <a href="sport.html" class="btn">Explore Program <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-image">
+                    <div class="program-image-content">
+                        <i class="fas fa-language program-icon"></i>
+                        <h3>LANGUAGES PROGRAM</h3>
+                    </div>
+                </div>
+                <div class="program-content">
+                    <h3 class="program-title">World Languages</h3>
+                    <p class="program-description">Master multiple languages and cultures in our immersive program that opens doors to international opportunities and cross-cultural understanding.</p>
+                    <ul class="program-details">
+                        <li>English Literature and Composition</li>
+                        <li>French, Spanish, and Chinese</li>
+                        <li>Amharic and Local Languages</li>
+                        <li>Translation and Interpretation</li>
+                    </ul>
+                    <div class="program-features">
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-globe-africa"></i></div>
+                            <div class="feature-label">6 Languages</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-exchange-alt"></i></div>
+                            <div class="feature-label">Exchange Programs</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-certificate"></i></div>
+                            <div class="feature-label">Certification</div>
+                        </div>
+                    </div>
+                    <a href="laguage.html" class="btn">Explore Program <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-image">
+                    <div class="program-image-content">
+                        <i class="fas fa-music program-icon"></i>
+                        <h3>PERFORMING ARTS</h3>
+                    </div>
+                </div>
+                <div class="program-content">
+                    <h3 class="program-title">Music & Drama</h3>
+                    <p class="program-description">Develop your artistic talents in our comprehensive performing arts program that nurtures creativity and stagecraft excellence.</p>
+                    <ul class="program-details">
+                        <li>Instrumental and Vocal Training</li>
+                        <li>Theater Production and Direction</li>
+                        <li>Dance and Choreography</li>
+                        <li>Sound Engineering Basics</li>
+                    </ul>
+                    <div class="program-features">
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-guitar"></i></div>
+                            <div class="feature-label">Recording Studio</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-masks-theater"></i></div>
+                            <div class="feature-label">Annual Play</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-microphone"></i></div>
+                            <div class="feature-label">Talent Shows</div>
+                        </div>
+                    </div>
+                    <a href="performingart.html" class="btn">Explore Program <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-image">
+                    <div class="program-image-content">
+                        <i class="fas fa-heartbeat program-icon"></i>
+                        <h3>HEALTH SCIENCES</h3>
+                    </div>
+                </div>
+                <div class="program-content">
+                    <h3 class="program-title">Pre-Medical Program</h3>
+                    <p class="program-description">Prepare for careers in medicine and healthcare with our rigorous program that combines scientific knowledge with practical experience.</p>
+                    <ul class="program-details">
+                        <li>Human Anatomy and Physiology</li>
+                        <li>Medical Terminology</li>
+                        <li>Public Health Principles</li>
+                        <li>First Aid and Emergency Care</li>
+                    </ul>
+                    <div class="program-features">
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-hospital"></i></div>
+                            <div class="feature-label">Hospital Tie-ups</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-stethoscope"></i></div>
+                            <div class="feature-label">Med Camp</div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-ambulance"></i></div>
+                            <div class="feature-label">EMT Training</div>
+                        </div>
+                    </div>
+                    <a href="HEALTH.HTML" class="btn">Explore Program <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="school-badge">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <p>AYER AMBA SECONDARY SCHOOL</p>
+            <p>Providing Quality Education Since 1985</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@ayerambass.edu</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+251 123 456 789</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Ayer Amba Town, Ethiopia</span>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            
+            <p class="copyright">© 2023 Ayer Amba Secondary School. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
